@@ -103,7 +103,7 @@ def main(argv):
     args = parser.parse_args()
     #image_data = open(args.input_file).read()
     with open(args.input_file, 'rb') as f:
-        image_data = BytesIO()
+        #image_data = BytesIO()
         image_data.write(f.read)
         #image_data = f.read()
     # Pre-load caffe model.
