@@ -102,7 +102,7 @@ def main(argv):
 
     args = parser.parse_args()
     #image_data = open(args.input_file).read()
-    with open(args.input_file, 'r') as f:
+    with open(args.input_file, 'rи') as f:
         image_data = f.read()
     # Pre-load caffe model.
     nsfw_net = caffe.Net(args.model_def,  # pylint: disable=invalid-name
