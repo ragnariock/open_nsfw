@@ -11,7 +11,7 @@ import sys
 import argparse
 import glob
 import time
-from PIL import Image
+from PIL import Image,ImageFile
 from io import StringIO
 import caffe
 from io import BytesIO
