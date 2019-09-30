@@ -12,7 +12,7 @@ import argparse
 import glob
 import time
 from PIL import Image
-from StringIO import StringIO
+ from io import StringIO
 import caffe
 
 
