@@ -29,7 +29,7 @@ def resize_image(data, sz=(256, 256)):
     """
     ImageFile.LOAD_TRUNCATED_IMAGES = True
     img_data = str(data)
-    im = Image.open(img_data)
+    im = Image.open(StringIO(img_data))
     if im.mode != "RGB":
         im = im.convert('RGB')
     imr = im.resize(sz, resample=Image.BILINEAR)
