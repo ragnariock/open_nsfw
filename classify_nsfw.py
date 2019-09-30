@@ -27,8 +27,9 @@ def resize_image(data, sz=(256, 256)):
     :returns bytearray:
         A byte array with the resized image
     """
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
     img_data = str(data)
-    im = Image.open(StringIO(img_data))
+    im = Image.open(img_data)
     if im.mode != "RGB":
         im = im.convert('RGB')
     imr = im.resize(sz, resample=Image.BILINEAR)
@@ -82,7 +83,7 @@ def caffe_preprocess_and_compute(pimg, caffe_transformer=None, caffe_net=None,
 
 def main(argv):
     pycaffe_dir = os.path.dirname(__file__)
-
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
     parser = argparse.ArgumentParser()
     # Required arguments: input file.
     parser.add_argument(
@@ -103,7 +104,8 @@ def main(argv):
     args = parser.parse_args()
     #image_data = open(args.input_file).read()
     with open(args.input_file, 'rb') as f:
-        image_data = f.read()
+        image_data = BytesIO()
+        image_data.write(f.read())
     # Pre-load caffe model.
     nsfw_net = caffe.Net(args.model_def,  # pylint: disable=invalid-name
         args.pretrained_model, caffe.TEST)
