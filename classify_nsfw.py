@@ -14,7 +14,7 @@ import time
 from PIL import Image
 from io import StringIO
 import caffe
-
+from io import BytesIO
 
 def resize_image(data, sz=(256, 256)):
     """
@@ -101,9 +101,11 @@ def main(argv):
     )
 
     args = parser.parse_args()
-    image_data = open(args.input_file).read()
-    #with open(args.input_file, 'rb') as f:
-    #    image_data = f.read()
+    #image_data = open(args.input_file).read()
+    with open(args.input_file, 'rb') as f:
+        image_data = BytesIO()
+        image_data.write(f.read)
+        #image_data = f.read()
     # Pre-load caffe model.
     nsfw_net = caffe.Net(args.model_def,  # pylint: disable=invalid-name
         args.pretrained_model, caffe.TEST)
