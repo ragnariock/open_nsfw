@@ -27,7 +27,7 @@ def resize_image(data, sz=(256, 256)):
     :returns bytearray:
         A byte array with the resized image
     """
-    ImageFile.LOAD_TRUNCATED_IMAGES = True
+    #ImageFile.LOAD_TRUNCATED_IMAGES = True
     img_data = str(data)
     im = Image.open(StringIO(img_data))
     if im.mode != "RGB":
@@ -102,10 +102,10 @@ def main(argv):
     )
 
     args = parser.parse_args()
-    #image_data = open(args.input_file).read()
-    with open(args.input_file, 'rb') as f:
-        image_data = BytesIO()
-        image_data.write(f.read())
+    image_data = open(args.input_file).read()
+#     with open(args.input_file, 'rb') as f:
+#         image_data = BytesIO()
+#         image_data.write(f.read())
     # Pre-load caffe model.
     nsfw_net = caffe.Net(args.model_def,  # pylint: disable=invalid-name
         args.pretrained_model, caffe.TEST)
